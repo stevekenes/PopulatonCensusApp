@@ -20,5 +20,6 @@ namespace CensusApp.Data.ContextClasses
             base.OnModelCreating(builder);
             builder.SeedPersonData();
         }
+
     }
 }

@@ -22,14 +22,13 @@ namespace CensusApp.Data.Entities
         public string Gender { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
 
         [Required]
         public string Occupation { get; set; }
 
         [Required]
-        [StringLength(150, MinimumLength = 5, ErrorMessage = "Adress Should be minimum of 3 and maximum of 25 characters")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Adress Should be minimum of 3 and maximum of 100 characters")]
         public string ResidentialAdress { get; set; }
 
 
@@ -44,11 +43,14 @@ namespace CensusApp.Data.Entities
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
 
     }
 }
