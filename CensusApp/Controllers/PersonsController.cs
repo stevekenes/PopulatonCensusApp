@@ -110,5 +110,31 @@ namespace CensusApp.Controllers
             return Created("", personToCreate);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditPerson([FromBody] PersonRequest personRequest, int id)
+        {
+            PersonResponse personResponse;
+
+            var personToUpdate = _personService.GetByIdAsync(id);
+            if (personToUpdate == null)
+                return BadRequest("Sorry, Person Doesn't exist");
+
+            personResponse = await _personService.ModifyAsync(personRequest, id);
+            if (personResponse == null)
+                return BadRequest("Failed to update person");
+
+            return Ok(personResponse);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePerson(int id)
+        {
+            bool isDeleted = await _personService.DeleteAsync(id);
+            if (!isDeleted)
+                return BadRequest("Failed to delete person");
+            return Ok("Person deleted Successfully");
+        }
+
     }
 }

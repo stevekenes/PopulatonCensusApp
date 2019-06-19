@@ -20,9 +20,11 @@ namespace CensusApp.Data.Repositories
             _logger = logger;
         }
 
-        public Task<Person> DeleteAsync(Person person)
+        public async Task<int> DeleteAsync(Person person)
         {
-            throw new System.NotImplementedException();
+            _context.Remove(person);
+            var rowsAffected = await _context.SaveChangesAsync();
+            return rowsAffected;
         }
 
         public async Task<Person> Insert(Person person)
@@ -49,9 +51,12 @@ namespace CensusApp.Data.Repositories
             return persons;
         }
 
-        public Task<Person> UpdateAsync(Person person)
+        public async Task<Person> UpdateAsync(Person person)
         {
-            throw new System.NotImplementedException();
+            _context.Update(person);
+            await _context.SaveChangesAsync();
+            var updatedPerson = await SellectByIdAsync(person.Id);
+            return updatedPerson;
         }
 
         public IList<Person> SellectByGender(string gender)

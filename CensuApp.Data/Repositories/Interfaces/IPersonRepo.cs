@@ -16,7 +16,7 @@ namespace CensusApp.Data.Repositories.Interfaces
        
         Task<Person> Insert(Person person);
         Task<Person> UpdateAsync(Person person);
-        Task<Person> DeleteAsync(Person person);
+        Task<int> DeleteAsync(Person person);
 
     }
 }

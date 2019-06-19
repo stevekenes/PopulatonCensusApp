@@ -14,7 +14,7 @@ namespace CensusApp.Domain.Services.Interfaces
         IList<PersonResponse> GetByOccupation(string occupation);
 
         Task<PersonResponse> Create(PersonRequest person);
-        Task<PersonResponse> ModifyAsync(PersonResponse person);
-        Task<PersonResponse> DeleteAsync(PersonResponse person);
+        Task<PersonResponse> ModifyAsync(PersonRequest person, int id);
+        Task<bool> DeleteAsync(int uniqueIdentifier);
     }
 }

@@ -34,9 +34,13 @@ namespace CensusApp.Domain.Services
             return personQuery;
         }
 
-        public Task<PersonResponse> DeleteAsync(PersonResponse person)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            //retrieve person by id
+            var personToDelete = await _personRepo.SellectByIdAsync(id);
+            //tell repo to delete person
+            int affectedRows = await _personRepo.DeleteAsync(personToDelete);
+            return affectedRows > 0 ? true : false;
         }
 
         public IList<PersonResponse> GetAll()
@@ -60,9 +64,15 @@ namespace CensusApp.Domain.Services
             return personsQuery;
         }
 
-        public Task<PersonResponse> ModifyAsync(PersonResponse person)
+        public async Task<PersonResponse> ModifyAsync(PersonRequest person, int id)
         {
-            throw new NotImplementedException();
+            var pesin = await _personRepo.SellectByIdAsync(id);
+            var personUpdate = _mapper.Map(person, pesin);
+            personUpdate.DateUpdated = DateTime.Now;
+            var updatedPerson = await _personRepo.UpdateAsync(personUpdate);
+            var personResponse = _mapper.Map<PersonResponse>(updatedPerson);
+            return personResponse;
+
         }
 
         public IList<PersonResponse> GetByStateOfOrigin(string state)
