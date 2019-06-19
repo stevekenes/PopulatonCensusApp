@@ -18,11 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CensuApp.Data\CensusApp.Data.csproj" />
+    <ProjectReference Include="..\CensusApp.Domain\CensusApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

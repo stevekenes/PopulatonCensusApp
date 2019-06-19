@@ -45,7 +45,6 @@ namespace CensusApp.Data.Entities
         [DataType(DataType.PhoneNumber)]
         public long PhoneNumber { get; set; }
 
-        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

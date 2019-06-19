@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using CensusApp.Data.ContextClasses;
+using CensusApp.Data.Repositories;
+using CensusApp.Data.Repositories.Interfaces;
+using CensusApp.Domain.Services;
+using CensusApp.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +33,8 @@ namespace CensusApp
             services.AddDbContext<CensusDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddAutoMapper();
+            services.AddScoped<IPersonRepo, PersonRepo>();
+            services.AddScoped<IPersonService, PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
