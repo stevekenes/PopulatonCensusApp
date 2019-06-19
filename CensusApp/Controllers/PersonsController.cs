@@ -4,6 +4,7 @@ using CensusApp.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CensusApp.Controllers
@@ -98,6 +99,20 @@ namespace CensusApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePerson([FromBody] PersonRequest personRequest)
         {
+            if (personRequest == null)
+                return BadRequest(ModelState);
+
+            var personExist = _personService.GetAll().Where(p => p.FirstName == personRequest.FirstName
+            && p.LastName == personRequest.LastName
+            && p.HomeTown == personRequest.HomeTown
+            && p.DateOfBirth == personRequest.DateOfBirth).FirstOrDefault();
+
+            if (personExist != null)
+            {
+                ModelState.AddModelError("", $"the Person already Exist, please check your request");
+                return StatusCode(422, ModelState);
+            }
+
             if (personRequest == null)
                 return BadRequest(ModelState);
 
