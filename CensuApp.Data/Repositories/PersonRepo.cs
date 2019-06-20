@@ -47,7 +47,7 @@ namespace CensusApp.Data.Repositories
 
         public IList<Person> SellectAll()
         {
-            var persons = _context.Persons.ToList();
+            var persons = _context.Persons.OrderBy(p => p.FirstName).ToList();
             return persons;
         }
 
@@ -61,19 +61,22 @@ namespace CensusApp.Data.Repositories
 
         public IList<Person> SellectByGender(string gender)
         {
-            var persons = _context.Persons.Where(g => g.Gender == gender).ToList();
+            var persons = _context.Persons.Where(g => g.Gender == gender)
+                .OrderBy(p => p.FirstName).ToList();
             return persons;
         }
 
         public IList<Person> SellectByStateOfOrigin(string state)
         {
-            var origin = _context.Persons.Where(s => s.StateOfOrigin == state).ToList();
+            var origin = _context.Persons.Where(s => s.StateOfOrigin == state)
+                .OrderBy(p => p.FirstName).ToList();
             return origin;
         }
 
         public IList<Person> SellectByOccupation(string occupation)
         {
-            var job = _context.Persons.Where(o => o.Occupation == occupation).ToList();
+            var job = _context.Persons.Where(o => o.Occupation == occupation)
+                .OrderBy(p => p.FirstName).ToList();
             return job;
         }
     }
